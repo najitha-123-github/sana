@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2024 at 11:07 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jan 03, 2025 at 06:42 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,23 +52,10 @@ CREATE TABLE `complaints` (
 INSERT INTO `complaints` (`name`, `dob`, `address`, `phno`, `complaint_type`, `date`, `complaint_detail`, `photo`, `suspect_name`, `details`, `email`, `officerid`, `complaint_id`, `voice`, `status`) VALUES
 ('shaharban', '2004-03-24', 'karimattom h,kummanode,pattimattom po,683562', 2147483647, 'Blackmail', '2024-09-29', 'wretyuio9ip[;uhgfdxcvbnm,', '', 'hafiz', 'a boy with specs and ugly smile', 'shaharban@gmail.com', '7', 37, 'uploads/audio/66f8e5564e3e8.mp3', 'accepted'),
 ('sana', '2005-03-09', 'fxdcgvhbjnm', 789456123, 'Blackmail', '2024-09-30', 'fghjkm,l', '', '', '', 'sana@gmail.com', '8', 38, '', 'FIR'),
-('ziyana', '2004-09-24', 'aesdftghjkl,;', 1234567890, 'Threats', '2024-09-30', 'srdtfvgnjkm', 'Screenshot 2024-09-19 152910.png', 'THUFAIL PB', 'wesrdtghuijokl;', 'ziyana@gmail.com', '8', 39, 'uploads/audio/66fa40d391c40.mp3', 'accepted'),
 ('MidhunaAnubhav', '2024-09-30', 'Kalamassery', 2147483647, 'Threats', '2026-12-25', 'Sexjual Hault', 'Aboutus.png', 'Adam', 'werrtr', 'midhu@gmail.com', '0', 40, 'uploads/audio/66fa4cfac43c1.mp3', 'declined'),
-('fathima', '2002-05-12', 'wertyuio', 2147483647, 'Threats', '2024-06-23', 'sdtfyghij', '', '3w45r67yuoip', 'eswsrdthyujkl;', 'fathima@gmail.com', '0', 41, '', 'accepted');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `locations`
---
-
-CREATE TABLE `locations` (
-  `id` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `latitude` decimal(10,8) NOT NULL,
-  `longitude` decimal(11,8) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+('fathima', '2002-05-12', 'wertyuio', 2147483647, 'Threats', '2024-06-23', 'sdtfyghij', '', '3w45r67yuoip', 'eswsrdthyujkl;', 'fathima@gmail.com', '0', 41, '', 'accepted'),
+('safna k s', '2004-02-22', 'safna manzil\r\nperumbavoor', 2147483647, 'Blackmail', '2024-12-05', 'Some one blackmailed me through phone', '', 'Suhail', '', 'safnasafna@gmail.com', '8', 42, '', 'accepted'),
+('Fathima salim', '2004-04-27', 'faby manzil\r\nperumbavoor', 2147483647, 'Blackmail', '2024-12-05', 'someone blackmail through online', '', 'rasheeda', 'cjhid sosip ', 'fathimafaby@gmail.com', '0', 43, '', 'pending');
 
 -- --------------------------------------------------------
 
@@ -95,7 +82,10 @@ INSERT INTO `login` (`email`, `password`, `usertype`) VALUES
 ('ziyana@gmail.com', '1234567890', 0),
 ('midhu@gmail.com', '8940846316', 0),
 ('abc@gmail.com', 'abc123', 1),
-('fathima@gmail.com', 'Fathima@123', 0);
+('fathima@gmail.com', 'Fathima@123', 0),
+('safnasafna@gmail.com', 'safnaSAPPU@123', 0),
+('fathimafaby@gmail.com', 'fathimaFABY@123', 0),
+('riza123@gmail.com', 'rizaRIZA@123', 1);
 
 -- --------------------------------------------------------
 
@@ -136,18 +126,20 @@ CREATE TABLE `officer` (
   `dob` date NOT NULL,
   `name` varchar(30) NOT NULL,
   `passwordoff` varchar(20) NOT NULL,
-  `email` varchar(30) NOT NULL
+  `email` varchar(30) NOT NULL,
+  `status` enum('active','inactive') DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `officer`
 --
 
-INSERT INTO `officer` (`officerid`, `position`, `phonenum`, `dob`, `name`, `passwordoff`, `email`) VALUES
-(7, 'si', '7894561230', '2024-09-09', 'imran', 'imran123', 'imran@gmail.com'),
-(8, 'ci', '1234567890', '2024-09-29', 'akbar', 'akbar123', 'akbar@gmail.com'),
-(11, 'constable', '4567891230', '2024-09-30', 'afnan', 'afnan@gmail.com', 'akbar@gmail.com'),
-(12, 'ci', '1234567890', '2000-03-24', 'abc', 'abc123', 'abc@gmail.com');
+INSERT INTO `officer` (`officerid`, `position`, `phonenum`, `dob`, `name`, `passwordoff`, `email`, `status`) VALUES
+(7, 'si', '7894561230', '2024-09-09', 'imran', 'imran123', 'imran@gmail.com', 'inactive'),
+(8, 'ci', '1234567890', '2024-09-29', 'akbar', 'akbar123', 'akbar@gmail.com', 'inactive'),
+(11, 'constable', '4567891230', '2024-09-30', 'afnan', 'afnan@gmail.com', 'akbar@gmail.com', 'inactive'),
+(12, 'ci', '1234567890', '2000-03-24', 'abc', 'abc123', 'abc@gmail.com', 'active'),
+(13, 'police', '9056321478', '2024-12-05', 'riza', 'rizaRIZA@123', 'riza123@gmail.com', 'active');
 
 -- --------------------------------------------------------
 
@@ -206,18 +198,21 @@ CREATE TABLE `users` (
   `address` varchar(70) NOT NULL,
   `phno` varchar(20) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `usid` int(10) NOT NULL
+  `usid` int(10) NOT NULL,
+  `status` enum('active','inactive') DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`name`, `email`, `dob`, `address`, `phno`, `password`, `usid`) VALUES
-('shaharban', 'shaharban@gmail.com', '2004-03-24', 'karimattom h,kummanode,pattimattom po,683562', '9564585658', 'shahar@321', 35),
-('sana', 'sana@gmail.com', '2005-03-09', 'fxdcgvhbjnm', '789456123', 'sana@123', 36),
-('ziyana', 'ziyana@gmail.com', '2004-09-24', 'aesdftghjkl,;', '1234567890', '1234567890', 37),
-('fathima', 'fathima@gmail.com', '2002-05-12', 'wertyuio', '4321567890', 'Fathima@123', 39);
+INSERT INTO `users` (`name`, `email`, `dob`, `address`, `phno`, `password`, `usid`, `status`) VALUES
+('shaharban', 'shaharban@gmail.com', '2004-03-24', 'karimattom h,kummanode,pattimattom po,683562', '9564585658', 'shahar@321', 35, 'inactive'),
+('sana', 'sana@gmail.com', '2005-03-09', 'fxdcgvhbjnm', '789456123', 'sana@123', 36, 'active'),
+('ziyana', 'ziyana@gmail.com', '2004-09-24', 'aesdftghjkl,;', '1234567890', '1234567890', 37, 'active'),
+('fathima', 'fathima@gmail.com', '2002-05-12', 'wertyuio', '4321567890', 'Fathima@123', 39, 'active'),
+('safna k s', 'safnasafna@gmail.com', '2004-02-22', 'safna manzil\r\nperumbavoor', '9658565254', 'safnaSAPPU@123', 40, 'active'),
+('Fathima salim', 'fathimafaby@gmail.com', '2004-04-27', 'faby manzil\r\nperumbavoor', '9457632150', 'fathimaFABY@123', 41, 'inactive');
 
 --
 -- Indexes for dumped tables
@@ -228,12 +223,6 @@ INSERT INTO `users` (`name`, `email`, `dob`, `address`, `phno`, `password`, `usi
 --
 ALTER TABLE `complaints`
   ADD PRIMARY KEY (`complaint_id`);
-
---
--- Indexes for table `locations`
---
-ALTER TABLE `locations`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `messages`
@@ -273,13 +262,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `complaints`
 --
 ALTER TABLE `complaints`
-  MODIFY `complaint_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- AUTO_INCREMENT for table `locations`
---
-ALTER TABLE `locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `complaint_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -291,7 +274,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `officer`
 --
 ALTER TABLE `officer`
-  MODIFY `officerid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `officerid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `officer_reviews`
@@ -309,7 +292,7 @@ ALTER TABLE `request`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `usid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `usid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
